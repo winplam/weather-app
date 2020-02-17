@@ -1,0 +1,64 @@
+.button {
+  border: none;
+  background: $accent-color;
+  padding: 10px 20px;
+  color: white;
+}
+
+form {
+  width: 500px;
+  // Center text input horizontally
+  margin-left: auto;
+  margin-right: auto;
+
+  input, textarea, select {
+    outline: none;
+    border: none;
+    padding: 10px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  //
+  input[type="submit"], button, input[type="reset"] {
+    @extend .button;
+  }
+}
+
+.find-container {
+  background-size: cover;
+  padding-top: 50px;
+  min-height: 350px;
+}
+
+//
+.find-location {
+  position: relative;
+
+  input[type="text"] {
+    width: 100%;
+    padding: 20px 50px 20px 20px;
+    background: $bg-color;
+    color: white;
+  }
+
+  input[type="submit"] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    padding: 0 40px;
+  }
+
+  input[type="submit"]:active {
+    transform: translateY(3px) translateX(2px);
+  }
+}

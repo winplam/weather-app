@@ -1,0 +1,15 @@
+body {
+  color: $body-color;
+  font-family: $primary-font;
+  font-size: #{$browser-context}px;
+  font-weight: 300;
+  line-height: 1.5;
+  background: $bg-color;
+}
+
+.app {
+  text-align: center;
+  height: 680px;
+  display: grid;
+  grid-template-rows: 106px 0;
+}

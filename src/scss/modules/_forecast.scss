@@ -1,0 +1,121 @@
+.forecast-table {
+  width: 500px;
+  grid-row: 3;
+  // Center main weather report horizontally
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forecast-container {
+  width: 100%;
+  background: #323544;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  overflow: hidden;
+
+  .forecast {
+    display: table-cell;
+    vertical-align: top;
+    width: 160px;
+
+    &:nth-child(even) {
+      background-color: #262936;
+    }
+
+    &.today {
+      width: 420px;
+
+      .forecast-header {
+        @include clearfix;
+
+        .day {
+          float: left;
+        }
+
+        .date {
+          float: right
+        }
+
+        button {
+          background-color: $accent-color;
+          border-color: $accent-color;
+          color: white;
+          outline: none;
+          margin-left: 10px;
+        }
+
+        button:active {
+          transform: translateY(1px) translateX(1px);
+        }
+      }
+
+      .forecast-content {
+        text-align: left;
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      .location {
+        @include em(18);
+        font-weight: 400;
+      }
+
+      .degree {
+        .num, .forecast-icon {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .num {
+          @include rem(90);
+          margin-right: 30px;
+        }
+      }
+
+      span {
+        margin-right: 20px;
+
+        img {
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+
+      @media screen and (max-width: 990px) {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .forecast-header {
+      background: rgba(0, 0, 0, .1);
+      padding: 10px;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .forecast-icon {
+      height: 50px;
+    }
+
+    .forecast-content {
+      padding: 50px 20px 10px;
+      text-align: center;
+
+      .forecast-icon {
+        margin-bottom: 20px;
+      }
+
+      .degree {
+        @include em(24);
+        color: white;
+        font-weight: 700;
+      }
+
+      small {
+        @include em(16)
+      }
+    }
+  }
+}

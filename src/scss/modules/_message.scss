@@ -1,0 +1,11 @@
+.message {
+  background-color: white;
+  @include em(18);
+  //font-family: $secondary-font;
+  color: $message-color;
+  grid-row: 2;
+  margin: 44px auto 0 auto;
+  text-align: center;
+  width: 500px;
+  z-index: 1;
+}
