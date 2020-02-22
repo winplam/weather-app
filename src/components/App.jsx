@@ -22,17 +22,15 @@ export default class App extends React.Component {
   }
 
   // Initialize today's weather report with current data from API
-  createReport (city, units) {
-    fetchData(city, 'weather', units).then(response => {
-      this.setState({ weatherReport: formatReport(response, units) })
-    })
+  async createReport (city, units) {
+    const result = await fetchData(city, 'weather', units)
+    this.setState({ weatherReport: formatReport(result, units) })
   }
 
   // Initialize 5 day weather forecast with current data from API
-  createForecast (city, units) {
-    fetchData(city, 'forecast', units).then(response => {
-      this.setState({ forecastTable: response })
-    })
+  async createForecast (city, units) {
+    const result = await fetchData(city, 'forecast', units)
+    this.setState({ forecastTable: result })
   }
 
   getCityFromStorage () {
@@ -52,18 +50,16 @@ export default class App extends React.Component {
   }
 
   // Get city from IP location lookup
-  ipLookup = () => {
-    this.updateMessage('Looking up local weather', 1, true)
-    fetchIPLookup()
-      .then(response => {
-        if (response.status === 'success') {
-          const city = `${response.city}, ${response.countryCode}`
-          this.setState({ city: response.city })
-          this.loadData(this.state.city, this.state.units)
-        } else {
-          this.updateMessage('IP location lookup error: ' + response, 3)
-        }
-      })
+  ipLookup = async () => {
+    this.updateMessage('Looking up local weather', 1000, true)
+    const result = await fetchIPLookup()
+    if (result.status === 'success') {
+      const city = `${result.city}, ${result.countryCode}`
+      this.setState({ city: city })
+      this.loadData(this.state.city, this.state.units)
+    } else {
+      this.updateMessage('IP location lookup error: ' + result, 3000)
+    }
   }
 
   // Load report and forecast
@@ -86,7 +82,7 @@ export default class App extends React.Component {
   // Update weather display with selected city
   updateCity = city => {
     if (city) {
-      this.updateMessage('Looking up weather for ' + city, 1, true)
+      this.updateMessage('Looking up weather for ' + city, 1000, true)
     } else {
       this.updateMessage('Looking up weather', 1, true)
     }
@@ -99,9 +95,9 @@ export default class App extends React.Component {
   }
 
   // Show alert or warning message
-  updateMessage = (message, seconds, showLoader) => {
+  updateMessage = (message, milliseconds, showLoader) => {
     this.setState({ message: message, showLoader: showLoader })
-    setTimeout(() => {this.setState({ message: '', showLoader: false })}, seconds * 1000)
+    setTimeout(() => {this.setState({ message: '', showLoader: false })}, milliseconds)
   }
 
   // Update today's weather report after user submits new city input

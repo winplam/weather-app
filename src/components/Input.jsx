@@ -19,36 +19,41 @@ export default class Input extends React.Component {
     this.setState({ city: event.target.value })
   }
 
-  getCities = () => {
-    csv('./data/world-cities.csv').then(cityData => {this.suggestCities(cityData)})
+  getCities = async () => {
+    const response = await csv('./data/world-cities.csv')
+    this.suggestCities(response)
   }
 
   // Get today's weather report from API. And call method to get 5 day forecast
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault()
     const inputBox = document.querySelector('input')
     const city = inputBox.value
+    if (city === '') {
+      this.props.updateMessage('Please enter a city', 3000)
+      return
+    }
     this.props.updateCity(city)
-    fetchData(city, 'weather', this.props.units).then(response => {
-      try {
-        if (response.cod === 200) {
-          const report = formatReport(response, this.props.units)
-          this.props.updateReport(report)
-          this.fetchForecast(city)
-        }
-      } catch (error) {
-        console.error(error)
-        this.props.updateMessage('City not found: ' + city, 3)
+    const response = await fetchData(city, 'weather', this.props.units)
+    try {
+      if (response.cod === 200) {
+        const report = formatReport(response, this.props.units)
+        this.props.updateReport(report)
+        this.fetchForecast(city)
+      } else {
+        this.props.updateMessage('City not found: ' + city, 3000)
       }
-    })
+    } catch (error) {
+      console.error(error)
+      this.props.updateMessage('ERROR: City not found: ' + city, 3000)
+    }
     inputBox.value = ''
   }
 
   // Get 5 day weather forecast from API
-  fetchForecast = (city) => {
-    fetchData(city, 'forecast', this.props.units).then(response => {
-      this.props.updateForecast(response)
-    })
+  fetchForecast = async (city) => {
+    const result = await fetchData(city, 'forecast', this.props.units)
+    this.props.updateForecast(result)
   }
 
   suggestCities = (data) => {
