@@ -8,10 +8,16 @@ This project was created as an assignment for The Odin Project [JavaScript cours
  demonstrating mastery of key concepts such as Promises, Async/Await, Fetch/API usage, and JSON usage.
 I've also went above and beyond the requirements of the project implementing IP location feature (Local Weather button), React.JS usage, localStorage for auto saving settings, and a nifty city suggestions dropdown.
 I chose to first use .then/.catch and latter refactor to async/await to get proficiency with using different ways of working with asynchronous code.
+The icons update depending on weather conditions.
 
+One of the things I enjoyed about this project is putting together different components, tools, and libraries and making
+ them all work together as a whole in one app.
+I didn't want this app to be just a demo but to make it actually something that can be used for practical purposes.
+There was the thought about making the background update depending on the location but soon realized what a monstrous
+ undertaking it will be to get download background images for ever single country in the world.
+A feature that would be nice to implement in a feature version is a daily high and low. 
 
 ### [Live Demo ](https://winplam.github.io/weather-app/)
-
 
 ## Key Concepts
 * Promise (then/catch) on "promise" branch
@@ -30,6 +36,8 @@ I chose to first use .then/.catch and latter refactor to async/await to get prof
 * [D3.js](https://d3js.org/) This library was used to load CSV files
 * [DataHub](https://datahub.io/core/world-cities) Provided download of CSV file containing list of cities from all over the world
 * [Suggestions component](https://github.com/tristen/suggestions) Use for making a suggestions dropdown of the possible cities
+* [Themezy template](https://www.themezy.com/free-website-templates/128-steel-weather-free-responsive-website-template)
+Thanks to Themezy for their beautiful HTML / CSS template that was used as a base for this design 
 * [Unsplash](https://unsplash.com/): Used for the beautiful free background image
 
 ![Weather App Screenshot](public/images/screenshot.png)
